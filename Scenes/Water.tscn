@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://xl7va4bfy7cl"]
+
+[ext_resource type="Shader" uid="uid://qnhw7oxrxx1h" path="res://Shaders/VisualWaterTest.tres" id="1_dic1q"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_if270"]
+render_priority = 0
+shader = ExtResource("1_dic1q")
+shader_parameter/ColorParameter = Color(1.03481e-06, 0.335311, 0.335549, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_yq54y"]
+material = SubResource("ShaderMaterial_if270")
+size = Vector2(16, 16)
+subdivide_width = 16
+subdivide_depth = 16
+
+[node name="Node3D" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+layers = 2
+mesh = SubResource("PlaneMesh_yq54y")
