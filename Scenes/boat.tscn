@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3 uid="uid://dketv6ensadcq"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_frvpq"]
+size = Vector3(1, 1, 2)
+
+[node name="Boat" type="MeshInstance3D"]
+mesh = SubResource("BoxMesh_frvpq")
+
+[node name="Node3D" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, -0.5, 1)
+
+[node name="Node3D4" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, -0.5, 1)
+
+[node name="Node3D2" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, -0.5, -1)
+
+[node name="Node3D3" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, -0.5, -1)
