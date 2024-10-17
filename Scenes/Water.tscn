@@ -5,7 +5,6 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_if270"]
 render_priority = 0
 shader = ExtResource("1_dic1q")
-shader_parameter/ColorParameter = Color(1.03481e-06, 0.335311, 0.335549, 1)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_yq54y"]
 material = SubResource("ShaderMaterial_if270")
@@ -16,5 +15,25 @@ subdivide_depth = 16
 [node name="Node3D" type="Node3D"]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+layers = 2
+mesh = SubResource("PlaneMesh_yq54y")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0, 0)
+layers = 2
+mesh = SubResource("PlaneMesh_yq54y")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0, -16)
+layers = 2
+mesh = SubResource("PlaneMesh_yq54y")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -16)
+layers = 2
+mesh = SubResource("PlaneMesh_yq54y")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0, 16)
 layers = 2
 mesh = SubResource("PlaneMesh_yq54y")
