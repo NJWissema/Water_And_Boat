@@ -1,47 +1,20 @@
-[gd_scene load_steps=5 format=3 uid="uid://xl7va4bfy7cl"]
+[gd_scene load_steps=4 format=3 uid="uid://cvsbwjs3ro5v4"]
 
 [ext_resource type="Shader" uid="uid://qnhw7oxrxx1h" path="res://Shaders/VisualWaterTest.tres" id="1_dic1q"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_if270"]
 render_priority = 0
 shader = ExtResource("1_dic1q")
-shader_parameter/ColorParameter = Color(2e-06, 0.255785, 0.255975, 1)
 shader_parameter/Alpha = 1.0
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_yq54y"]
 material = SubResource("ShaderMaterial_if270")
-size = Vector2(16, 16)
+size = Vector2(64, 64)
 subdivide_width = 16
 subdivide_depth = 16
 
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_ukerw"]
-
-[node name="Node3D" type="Node3D"]
+[node name="Water" type="Node3D"]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 layers = 2
 mesh = SubResource("PlaneMesh_yq54y")
-
-[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0, 0)
-layers = 2
-mesh = SubResource("PlaneMesh_yq54y")
-
-[node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0, -16)
-layers = 2
-mesh = SubResource("PlaneMesh_yq54y")
-
-[node name="MeshInstance3D5" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -16)
-layers = 2
-mesh = SubResource("PlaneMesh_yq54y")
-
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0, 16)
-layers = 2
-mesh = SubResource("PlaneMesh_yq54y")
-
-[node name="MeshInstance3D6" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.40956, 2.1407, 0)
-mesh = SubResource("CapsuleMesh_ukerw")
