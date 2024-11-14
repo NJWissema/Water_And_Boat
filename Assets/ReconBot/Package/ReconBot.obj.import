@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://cei8looqorxxa"
+path="res://.godot/imported/ReconBot.obj-5e21a1df8e7c465c447cda4a7f8b5664.mesh"
+
+[deps]
+
+files=["res://.godot/imported/ReconBot.obj-5e21a1df8e7c465c447cda4a7f8b5664.mesh"]
+
+source_file="res://Assets/ReconBot/Package/ReconBot.obj"
+dest_files=["res://.godot/imported/ReconBot.obj-5e21a1df8e7c465c447cda4a7f8b5664.mesh", "res://.godot/imported/ReconBot.obj-5e21a1df8e7c465c447cda4a7f8b5664.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

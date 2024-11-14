@@ -1,8 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://bbblo5e4h1h58"]
+[gd_scene load_steps=13 format=3 uid="uid://bbblo5e4h1h58"]
 
 [ext_resource type="Script" path="res://Scripts/LevelManager.gd" id="1_22ngv"]
 [ext_resource type="PackedScene" uid="uid://cha8wav82ruuq" path="res://Scenes/Player.tscn" id="1_end8q"]
 [ext_resource type="Shader" uid="uid://qnhw7oxrxx1h" path="res://Shaders/VisualWaterTest.tres" id="1_oyeem"]
+[ext_resource type="ArrayMesh" uid="uid://cei8looqorxxa" path="res://Assets/ReconBot/Package/ReconBot.obj" id="4_lljm4"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_k0fml"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -70,3 +71,7 @@ mesh = SubResource("BoxMesh_1eau1")
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.82908, -3.88796, 1.3734)
 mesh = SubResource("BoxMesh_gemvu")
+
+[node name="ReconBot" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.620696, 0, -0.784051, 0, 1, 0, 0.784051, 0, -0.620696, -5.47538, -4.22687, 11.871)
+mesh = ExtResource("4_lljm4")
