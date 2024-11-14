@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://be4kfdgab4wms"]
 
-[ext_resource type="Script" path="res://Scenes/Menus/ConnectionMenu.gd" id="1_jtsqr"]
+[ext_resource type="Script" path="res://Scripts/Menus/ConnectionMenu.gd" id="1_jtsqr"]
 
 [node name="ConnectionMenu" type="Control"]
 layout_mode = 3
@@ -25,6 +25,9 @@ offset_bottom = 33.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="Name" type="LineEdit" parent="VBoxContainer"]
+layout_mode = 2
+
 [node name="HostButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 text = "Host"
@@ -33,13 +36,5 @@ text = "Host"
 layout_mode = 2
 text = "Join"
 
-[node name="StartButton" type="Button" parent="VBoxContainer"]
-layout_mode = 2
-text = "Start"
-
-[node name="Name" type="LineEdit" parent="VBoxContainer"]
-layout_mode = 2
-
 [connection signal="pressed" from="VBoxContainer/HostButton" to="." method="_on_host_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/JoinButton" to="." method="_on_join_button_pressed"]
-[connection signal="pressed" from="VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]

@@ -1,5 +1,7 @@
 extends Node
 
+
+var player_name = ""
 var mouse_sensitivity = 0.01
 
 ## Called when the node enters the scene tree for the first time.

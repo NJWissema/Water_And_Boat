@@ -6,9 +6,13 @@ const JUMP_VELOCITY = 4.5
 
 @onready var neck := $Neck
 @onready var camera := $Neck/Camera3D
+@onready var head := $Neck/MeshInstance3D
 
 func _ready():
 	$MultiplayerSynchronizer.set_multiplayer_authority(str(name).to_int())
+	print(multiplayer.get_unique_id())
+	camera.current = $MultiplayerSynchronizer.get_multiplayer_authority() == multiplayer.get_unique_id()
+	
 
 func _unhandled_input(event):
 	if $MultiplayerSynchronizer.get_multiplayer_authority() == multiplayer.get_unique_id():
@@ -24,7 +28,7 @@ func _unhandled_input(event):
 				neck.rotate_y (-event.relative.x * PlayerVariables.mouse_sensitivity)
 				camera.rotate_x (-event.relative.y * PlayerVariables.mouse_sensitivity)
 				#Clamp camera rotation
-				camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-30), deg_to_rad(60))
+				camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-85), deg_to_rad(85))
 	
 func _physics_process(delta):
 	if $MultiplayerSynchronizer.get_multiplayer_authority() == multiplayer.get_unique_id():

@@ -1,16 +1,22 @@
 extends Control
 
+## IP address to host
 @export var Address = "127.0.0.1"
+## Port to host
 @export var port = 8910
-@export var lobbySize = 2
+## server capacity
+@export var lobbySize = 4
+
+## Lobby scene
+@export_node_path() var test
 
 var peer
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	multiplayer.peer_connected.connect(peer_connected)
-	multiplayer.peer_disconnected.connect(peer_disconnected)
-	multiplayer.connected_to_server.connect(connected_to_server)
-	multiplayer.connection_failed.connect(connection_failed)
+	#multiplayer.peer_connected.connect(peer_connected)
+	#multiplayer.peer_disconnected.connect(peer_disconnected)
+	#multiplayer.connected_to_server.connect(connected_to_server)
+	#multiplayer.connection_failed.connect(connection_failed)
 	pass # Replace with function body.
 
 
@@ -29,10 +35,10 @@ func connection_failed():
 	print("Connection Failed!")
 
 @rpc("any_peer")
-func send_player_information(name, id):
+func send_player_information(playerName, id):
 	if !GameManager.Players.has(id):
 		GameManager.Players[id] ={
-			"name" : name,
+			"name" : playerName,
 			"id": id,
 			"score": 0
 		}
@@ -47,26 +53,14 @@ func start_game():
 	self.hide()
 
 func _on_host_button_pressed():
-	peer = ENetMultiplayerPeer.new()
-	var error = peer.create_server(port, lobbySize)
-	if error != OK:
-		print("Cannot host  " + error)
-		return
-	peer.get_host().compress(ENetConnection.COMPRESS_RANGE_CODER)
-	
-	#Set multiplayer
-	multiplayer.set_multiplayer_peer(peer)
-	print("waiting for players")
-	
-	send_player_information($VBoxContainer/Name.text, multiplayer.get_unique_id())
+	var level_scene = load("res://Scenes/Lobby.tscn").instantiate()
+	level_scene.isHost = true
+	get_tree().root.add_child(level_scene)
+	self.hide()
 
 
 func _on_join_button_pressed():
-	peer = ENetMultiplayerPeer.new()
-	peer.create_client(Address, port)
-	peer.get_host().compress(ENetConnection.COMPRESS_RANGE_CODER)
-	multiplayer.set_multiplayer_peer(peer)
-
-
-func _on_start_button_pressed():
-	start_game.rpc()
+	var level_scene = load("res://Scenes/Lobby.tscn").instantiate()
+	level_scene.isHost = false
+	get_tree().root.add_child(level_scene)
+	self.hide()

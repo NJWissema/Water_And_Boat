@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://djj62i8ufyhji"]
-
-[ext_resource type="Script" path="res://Scripts/main.gd" id="1_cbqyf"]
-
-[node name="BoidGenerator" type="Node3D"]
-script = ExtResource("1_cbqyf")
