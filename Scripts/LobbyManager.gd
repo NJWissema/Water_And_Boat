@@ -7,13 +7,13 @@ extends Node3D
 ## server capacity
 @export var lobbySize = 4
 ##isHost check for setting up lobby.
-@export var isHost : bool
+@export var playerName = "_"
 var peer
 
 
 ## Player scene to be used.
 @export var playerScene : PackedScene
-var playerSpawnIndex:=0
+var playerSpawns = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -22,7 +22,10 @@ func _ready():
 	multiplayer.connected_to_server.connect(connected_to_server)
 	multiplayer.connection_failed.connect(connection_failed)
 	
-	if isHost:
+	for spawn in get_tree().get_nodes_in_group("PlayerSpawn"):
+		playerSpawns.append(spawn)
+		
+	if GameManager.Hosting:
 		peer = ENetMultiplayerPeer.new()
 		var error = peer.create_server(port, lobbySize)
 		if error != OK:
@@ -40,11 +43,9 @@ func _ready():
 		peer.create_client(Address, port)
 		peer.get_host().compress(ENetConnection.COMPRESS_RANGE_CODER)
 		multiplayer.set_multiplayer_peer(peer)
-	pass # Replace with function body.
 
 #Called on server and clients when peer connects
 func peer_connected(id):
-	spawn_player(id)
 	print("Player Connected " + str(id))
 #Called on server and clients when peer disconnects
 func peer_disconnected(id):
@@ -65,8 +66,10 @@ func send_player_information(playerName, id):
 		GameManager.Players[id] ={
 			"name" : playerName,
 			"id": id,
-			"score": 0
+			"score": 0,
+			"model": spawn_player(playerName, id)
 		}
+		#spawn_player(id)
 	
 	if multiplayer.is_server():
 		for i in GameManager.Players:
@@ -74,20 +77,26 @@ func send_player_information(playerName, id):
 			
 	
 
-func spawn_player(playerID):
+func spawn_player(playerName, playerID) -> CharacterBody3D:
 	var currentPlayer = playerScene.instantiate()
-	currentPlayer.name = str(GameManager.Players[playerID].id)
+	currentPlayer.name = str(playerID)
+	currentPlayer.playerName = playerName
+	currentPlayer.playerID = playerID
 	#if currentPlayer.name != str(multiplayer.get_unique_id()):
 		#currentPlayer.remove_child(currentPlayer.get_child(2))
 	add_child(currentPlayer)
 	
-	for spawn in get_tree().get_nodes_in_group("PlayerSpawn"):
-		if spawn.name == str(playerSpawnIndex):
-			currentPlayer.global_position = spawn.global_position
-	playerSpawnIndex+=1
+	#spawn at last used spawn location
+	var spawn = playerSpawns.pop_front()
+	currentPlayer.global_position = spawn.global_position
+	playerSpawns.append(spawn)
+	
+	return currentPlayer
 
 func delete_player(playerID):
-	pass
+	remove_child(GameManager.Players[playerID].model)
+	print(GameManager.Players[playerID].name + " Left")
+
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

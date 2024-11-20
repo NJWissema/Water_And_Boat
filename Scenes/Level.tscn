@@ -20,7 +20,10 @@ glow_enabled = true
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_a5cmk"]
 render_priority = 0
 shader = ExtResource("1_oyeem")
+shader_parameter/ColorParameter = Color(2e-06, 0.255785, 0.255975, 1)
 shader_parameter/Alpha = 0.4
+shader_parameter/Alpha2 = 0.0
+shader_parameter/Alpha3 = 0.5
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_5mvgm"]
 material = SubResource("ShaderMaterial_a5cmk")

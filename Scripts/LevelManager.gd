@@ -6,18 +6,18 @@ extends Node3D
 @export var isHost : bool
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	#var index = 0
-	#for i in GameManager.Players:
-		#var currentPlayer = playerScene.instantiate()
-		#currentPlayer.name = str(GameManager.Players[i].id)
-		#if currentPlayer.name != str(multiplayer.get_unique_id()):
-			#currentPlayer.remove_child(currentPlayer.get_child(2))
-		#add_child(currentPlayer)
-		#
-		#for spawn in get_tree().get_nodes_in_group("PlayerSpawn"):
-			#if spawn.name == str(index):
-				#currentPlayer.global_position = spawn.global_position
-		#index+=1
+	var index = 0
+	for i in GameManager.Players:
+		var currentPlayer = playerScene.instantiate()
+		currentPlayer.name = str(GameManager.Players[i].id)
+		if currentPlayer.name != str(multiplayer.get_unique_id()):
+			currentPlayer.remove_child(currentPlayer.get_child(2))
+		add_child(currentPlayer)
+		
+		for spawn in get_tree().get_nodes_in_group("PlayerSpawn"):
+			if spawn.name == str(index):
+				currentPlayer.global_position = spawn.global_position
+		index+=1
 	pass # Replace with function body.
 
 

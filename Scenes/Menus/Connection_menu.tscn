@@ -36,5 +36,6 @@ text = "Host"
 layout_mode = 2
 text = "Join"
 
+[connection signal="text_changed" from="VBoxContainer/Name" to="." method="_on_name_text_changed"]
 [connection signal="pressed" from="VBoxContainer/HostButton" to="." method="_on_host_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/JoinButton" to="." method="_on_join_button_pressed"]

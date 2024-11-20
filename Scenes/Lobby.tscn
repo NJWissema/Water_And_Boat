@@ -20,7 +20,10 @@ glow_enabled = true
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_a5cmk"]
 render_priority = 0
 shader = ExtResource("3_70o42")
+shader_parameter/ColorParameter = Color(2e-06, 0.255785, 0.255975, 1)
 shader_parameter/Alpha = 0.4
+shader_parameter/Alpha2 = 1.0
+shader_parameter/Alpha3 = 0.0
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_5mvgm"]
 material = SubResource("ShaderMaterial_a5cmk")
@@ -35,7 +38,7 @@ size = Vector3(2, 1, 1)
 [sub_resource type="BoxMesh" id="BoxMesh_gemvu"]
 size = Vector3(1, 2, 1)
 
-[node name="Main" type="Node3D"]
+[node name="Lobby" type="Node3D"]
 script = ExtResource("1_d5556")
 playerScene = ExtResource("2_ao8ki")
 
@@ -50,10 +53,31 @@ shadow_enabled = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.52726, 0)
 
 [node name="0" type="Node3D" parent="Spawns" groups=["PlayerSpawn"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 10, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 3, -2)
 
 [node name="1" type="Node3D" parent="Spawns" groups=["PlayerSpawn"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 10, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 3, 0)
+
+[node name="2" type="Node3D" parent="Spawns" groups=["PlayerSpawn"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 3, 2)
+
+[node name="3" type="Node3D" parent="Spawns" groups=["PlayerSpawn"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -2)
+
+[node name="4" type="Node3D" parent="Spawns" groups=["PlayerSpawn"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+
+[node name="5" type="Node3D" parent="Spawns" groups=["PlayerSpawn"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 2)
+
+[node name="6" type="Node3D" parent="Spawns" groups=["PlayerSpawn"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 3, 2)
+
+[node name="7" type="Node3D" parent="Spawns" groups=["PlayerSpawn"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 3, 0)
+
+[node name="8" type="Node3D" parent="Spawns" groups=["PlayerSpawn"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 3, -2)
 
 [node name="Floor" type="MeshInstance3D" parent="."]
 mesh = SubResource("PlaneMesh_5mvgm")
