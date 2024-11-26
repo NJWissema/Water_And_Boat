@@ -1,8 +1,8 @@
 [gd_scene load_steps=12 format=3 uid="uid://bbblo5e4h1h58"]
 
-[ext_resource type="Script" path="res://Scripts/LevelManager.gd" id="1_22ngv"]
-[ext_resource type="PackedScene" uid="uid://cha8wav82ruuq" path="res://Scenes/Player.tscn" id="1_end8q"]
-[ext_resource type="Shader" uid="uid://qnhw7oxrxx1h" path="res://Shaders/VisualWaterTest.tres" id="1_oyeem"]
+[ext_resource type="Script" path="res://Scripts/LevelManager.gd" id="1_l46i8"]
+[ext_resource type="PackedScene" uid="uid://cha8wav82ruuq" path="res://Scenes/SubScenes/Player.tscn" id="2_e3l4p"]
+[ext_resource type="Shader" uid="uid://qnhw7oxrxx1h" path="res://Shaders/VisualWaterTest.tres" id="3_w8c4r"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_k0fml"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -19,7 +19,7 @@ glow_enabled = true
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_a5cmk"]
 render_priority = 0
-shader = ExtResource("1_oyeem")
+shader = ExtResource("3_w8c4r")
 shader_parameter/ColorParameter = Color(2e-06, 0.255785, 0.255975, 1)
 shader_parameter/Alpha = 0.4
 shader_parameter/Alpha2 = 0.0
@@ -39,8 +39,8 @@ size = Vector3(2, 1, 1)
 size = Vector3(1, 2, 1)
 
 [node name="Main" type="Node3D"]
-script = ExtResource("1_22ngv")
-playerScene = ExtResource("1_end8q")
+script = ExtResource("1_l46i8")
+playerScene = ExtResource("2_e3l4p")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_27eat")

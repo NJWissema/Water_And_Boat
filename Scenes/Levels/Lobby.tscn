@@ -1,8 +1,8 @@
 [gd_scene load_steps=12 format=3 uid="uid://d3dfw41o3p7p3"]
 
-[ext_resource type="Script" path="res://Scripts/LobbyManager.gd" id="1_d5556"]
-[ext_resource type="PackedScene" uid="uid://cha8wav82ruuq" path="res://Scenes/Player.tscn" id="2_ao8ki"]
-[ext_resource type="Shader" uid="uid://qnhw7oxrxx1h" path="res://Shaders/VisualWaterTest.tres" id="3_70o42"]
+[ext_resource type="Script" path="res://Scripts/LobbyManager.gd" id="1_qcm27"]
+[ext_resource type="PackedScene" uid="uid://cha8wav82ruuq" path="res://Scenes/SubScenes/Player.tscn" id="2_s3xwi"]
+[ext_resource type="Shader" uid="uid://qnhw7oxrxx1h" path="res://Shaders/VisualWaterTest.tres" id="3_13oc1"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_k0fml"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -19,7 +19,7 @@ glow_enabled = true
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_a5cmk"]
 render_priority = 0
-shader = ExtResource("3_70o42")
+shader = ExtResource("3_13oc1")
 shader_parameter/ColorParameter = Color(2e-06, 0.255785, 0.255975, 1)
 shader_parameter/Alpha = 0.4
 shader_parameter/Alpha2 = 1.0
@@ -39,8 +39,8 @@ size = Vector3(2, 1, 1)
 size = Vector3(1, 2, 1)
 
 [node name="Lobby" type="Node3D"]
-script = ExtResource("1_d5556")
-playerScene = ExtResource("2_ao8ki")
+script = ExtResource("1_qcm27")
+playerScene = ExtResource("2_s3xwi")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_27eat")
@@ -88,7 +88,7 @@ mesh = SubResource("PlaneMesh_5mvgm")
 shape = SubResource("ConcavePolygonShape3D_yoha6")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.176744, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.104807, 0)
 mesh = SubResource("BoxMesh_1eau1")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="."]

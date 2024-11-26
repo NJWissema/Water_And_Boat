@@ -1,14 +1,7 @@
 extends Control
 
-## IP address to host
-@export var Address = "127.0.0.1"
-## Port to host
-@export var port = 8910
-## server capacity
-@export var lobbySize = 4
 
-
-var peer
+@export var multiplayerManager : PackedScene
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	#multiplayer.peer_connected.connect(peer_connected)
