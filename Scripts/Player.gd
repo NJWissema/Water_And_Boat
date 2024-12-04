@@ -16,10 +16,10 @@ var primaryPlayer : bool = false
 @onready var synchronizer := $MultiplayerSynchronizer
 
 func _ready():
-	print(synchronizer.get_path())
-	if str(name).to_int() == 1:
-		synchronizer.set_multiplayer_authority(str(name).to_int())
-		primaryPlayer = synchronizer.get_multiplayer_authority() == multiplayer.get_unique_id()
+	
+	synchronizer.set_multiplayer_authority(str(name).to_int())
+	primaryPlayer = synchronizer.get_multiplayer_authority() == multiplayer.get_unique_id()
+	#
 	camera.current = primaryPlayer
 	label.text = str(playerName)
 

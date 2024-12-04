@@ -1,7 +1,7 @@
 extends Control
 
 
-@export var multiplayerManager : PackedScene
+@export var multiplayerManager = "res://Scenes/Multiplayer/MultiplayerGameManager.tscn"
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	#multiplayer.peer_connected.connect(peer_connected)
@@ -38,18 +38,19 @@ func _ready():
 		#for i in GameManager.Players:
 			#send_player_information.rpc(GameManager.Players[i].name, i)
 
-func start_game(hosting: bool):
-	GameManager.Hosting = hosting
-	var level_scene = load("res://Scenes/Lobby.tscn").instantiate()
-	get_tree().root.add_child(level_scene)
+func start_game():
+	var MultiplayerManager = load(multiplayerManager).instantiate()
+	get_tree().root.add_child(MultiplayerManager)
 	self.hide()
 
 func _on_host_button_pressed():
-	start_game(true)
+	GameManager.Hosting = true
+	start_game()
 
 
 func _on_join_button_pressed():
-	start_game(false)
+	GameManager.Hosting = false
+	start_game()
 
 
 func _on_name_text_changed(new_text):

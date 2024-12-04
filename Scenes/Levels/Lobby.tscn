@@ -1,7 +1,6 @@
-[gd_scene load_steps=12 format=3 uid="uid://d3dfw41o3p7p3"]
+[gd_scene load_steps=11 format=3 uid="uid://d3dfw41o3p7p3"]
 
 [ext_resource type="Script" path="res://Scripts/LobbyManager.gd" id="1_qcm27"]
-[ext_resource type="PackedScene" uid="uid://cha8wav82ruuq" path="res://Scenes/SubScenes/Player.tscn" id="2_s3xwi"]
 [ext_resource type="Shader" uid="uid://qnhw7oxrxx1h" path="res://Shaders/VisualWaterTest.tres" id="3_13oc1"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_k0fml"]
@@ -38,9 +37,9 @@ size = Vector3(2, 1, 1)
 [sub_resource type="BoxMesh" id="BoxMesh_gemvu"]
 size = Vector3(1, 2, 1)
 
-[node name="Lobby" type="Node3D"]
+[node name="Lobby" type="Node3D" node_paths=PackedStringArray("PlayerSpawns")]
 script = ExtResource("1_qcm27")
-playerScene = ExtResource("2_s3xwi")
+PlayerSpawns = NodePath("Spawns")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_27eat")

@@ -8,8 +8,12 @@ extends Node
 ## server capacity
 @export var lobbySize = 4
 ## Scene for level
-@export var lobbyScene : PackedScene
-@export var levelScene : PackedScene
+@export var lobbyScene = "res://Scenes/Levels/Lobby.tscn"
+@export var levelScene = "res://Scenes/Levels/Level.tscn"
+
+var currentScene
+
+var inLobby : bool = true
 
 # main peer
 var peer
@@ -17,6 +21,8 @@ var peer
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	self.start_lobby()
+	
 	multiplayer.peer_connected.connect(peer_connected)
 	multiplayer.peer_disconnected.connect(peer_disconnected)
 	multiplayer.connected_to_server.connect(connected_to_server)
@@ -41,6 +47,8 @@ func _ready():
 		peer.create_client(Address, port)
 		peer.get_host().compress(ENetConnection.COMPRESS_RANGE_CODER)
 		multiplayer.set_multiplayer_peer(peer)
+		
+	
 
 
 #Called on server and clients when peer connects
@@ -66,17 +74,17 @@ func send_player_information(playerName, id):
 			"name" : playerName,
 			"id": id,
 			"score": 0,
-			"model": levelScene.spawn_player(playerName, id)
+			"NodePath": currentScene.spawn_player(playerName, id)
 		}
-		#spawn_player(id)
 	
 	if multiplayer.is_server():
 		for i in GameManager.Players:
 			send_player_information.rpc(GameManager.Players[i].name, i)
 
 func start_lobby():
-	lobbyScene.instantiate()
-	pass
+	currentScene = load(lobbyScene).instantiate()
+	self.add_child(currentScene)
+	inLobby = true
 
 func start_level():
-	pass
+	inLobby = false
