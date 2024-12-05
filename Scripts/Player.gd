@@ -5,26 +5,23 @@ const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
 
 var primaryPlayer : bool = false
-@export var playerName = "_"
-@export var playerID = 0
+@export var playerName: String
+@export var playerID: int
 
 @onready var neck := $Neck
 @onready var camera := $Neck/Camera3D
 @onready var label := $Label3D
 @onready var robot := $"3DGodotRobot"
 @onready var robotAnimation := $"3DGodotRobot/AnimationPlayer"
-@onready var synchronizer := $MultiplayerSynchronizer
 
 func _ready():
+	$MultiplayerSynchronizer.set_multiplayer_authority(str(name).to_int())
+	camera.current = $MultiplayerSynchronizer.get_multiplayer_authority() == multiplayer.get_unique_id()
 	
-	synchronizer.set_multiplayer_authority(str(name).to_int())
-	primaryPlayer = synchronizer.get_multiplayer_authority() == multiplayer.get_unique_id()
-	#
-	camera.current = primaryPlayer
 	label.text = str(playerName)
 
 func _unhandled_input(event):
-	if primaryPlayer:
+	if $MultiplayerSynchronizer.get_multiplayer_authority() == multiplayer.get_unique_id():
 		#Handle mouse state
 		if event is InputEventMouseButton:
 			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
@@ -41,7 +38,7 @@ func _unhandled_input(event):
 				camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-85), deg_to_rad(85))
 
 func _physics_process(delta):
-	if primaryPlayer:
+	if $MultiplayerSynchronizer.get_multiplayer_authority() == multiplayer.get_unique_id():
 		# Add the gravity.
 		if not is_on_floor():
 			velocity += get_gravity() * delta

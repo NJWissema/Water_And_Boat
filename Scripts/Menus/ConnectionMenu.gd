@@ -41,7 +41,7 @@ func _ready():
 func start_game():
 	var MultiplayerManager = load(multiplayerManager).instantiate()
 	get_tree().root.add_child(MultiplayerManager)
-	self.hide()
+	self.queue_free()
 
 func _on_host_button_pressed():
 	GameManager.Hosting = true

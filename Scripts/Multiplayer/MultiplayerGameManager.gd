@@ -54,32 +54,36 @@ func _ready():
 #Called on server and clients when peer connects
 func peer_connected(id):
 	print("Player Connected " + str(id))
+	
 #Called on server and clients when peer disconnects
 func peer_disconnected(id):
-	levelScene.despawn_player(id)
+	currentScene.despawn_player(id)
 	print("Player Disconnected " + str(id))
+
 #Client-only call. When connecting to server
 func connected_to_server():
 	print("Connected to server!")
 	send_player_information.rpc_id(1, PlayerVariables.player_name, multiplayer.get_unique_id())
+
 #Client-only call. When connection fails to server
 func connection_failed():
 	print("Connection Failed!")
 	
 #push player infromation to every other player
-@rpc("any_peer")
+@rpc("any_peer","call_remote")
 func send_player_information(playerName, id):
 	if !GameManager.Players.has(id):
 		GameManager.Players[id] ={
 			"name" : playerName,
 			"id": id,
-			"score": 0,
-			"NodePath": currentScene.spawn_player(playerName, id)
+			"NodePath": null
 		}
-	
+		GameManager.Players[id].NodePath = currentScene.spawn_player(playerName, id)
+		
 	if multiplayer.is_server():
 		for i in GameManager.Players:
-			send_player_information.rpc(GameManager.Players[i].name, i)
+			print("sending " + str(GameManager.Players[i].id))
+			send_player_information.rpc(GameManager.Players[i].name, GameManager.Players[i].id)
 
 func start_lobby():
 	currentScene = load(lobbyScene).instantiate()

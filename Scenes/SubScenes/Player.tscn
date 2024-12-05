@@ -9,7 +9,7 @@ height = 1.75
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_5ynce"]
 properties/0/path = NodePath(".:position")
-properties/0/spawn = false
+properties/0/spawn = true
 properties/0/replication_mode = 1
 properties/1/path = NodePath("3DGodotRobot:rotation")
 properties/1/spawn = true

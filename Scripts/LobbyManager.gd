@@ -12,11 +12,10 @@ func _ready():
 	for spawn in PlayerSpawns.get_children():
 		playerSpawns.append(spawn)
 
-
 func spawn_player(playerName, playerID) -> NodePath:
-	var currentPlayer = load(playerScene).instantiate()
 	
-	currentPlayer.name = str(playerID)
+	var currentPlayer = load(playerScene).instantiate()
+	currentPlayer.name = str(GameManager.Players[playerID].id)
 	currentPlayer.playerName = playerName
 	currentPlayer.playerID = playerID
 
@@ -29,7 +28,7 @@ func spawn_player(playerName, playerID) -> NodePath:
 	
 	return currentPlayer.get_path()
 
-func delete_player(playerID):
+func despawn_player(playerID):
 	get_node(GameManager.Players[playerID].NodePath).queue_free()
 	print(GameManager.Players[playerID].name + " Left")
 	GameManager.Players.erase(playerID)
