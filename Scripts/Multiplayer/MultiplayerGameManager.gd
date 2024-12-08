@@ -63,6 +63,7 @@ func peer_disconnected(id):
 #Client-only call. When connecting to server
 func connected_to_server():
 	print("Connected to server!")
+	addPlayerToDict(PlayerVariables.player_name, multiplayer.get_unique_id())
 	send_player_information.rpc_id(1, PlayerVariables.player_name, multiplayer.get_unique_id())
 
 #Client-only call. When connection fails to server
@@ -72,6 +73,13 @@ func connection_failed():
 #push player infromation to every other player
 @rpc("any_peer","call_remote")
 func send_player_information(playerName, id):
+	addPlayerToDict(playerName, id)
+	if multiplayer.is_server():
+		for i in GameManager.Players:
+			print("sending " + str(GameManager.Players[i].id))
+			send_player_information.rpc(GameManager.Players[i].name, GameManager.Players[i].id)
+
+func addPlayerToDict(playerName, id):
 	if !GameManager.Players.has(id):
 		GameManager.Players[id] ={
 			"name" : playerName,
@@ -79,12 +87,10 @@ func send_player_information(playerName, id):
 			"NodePath": null
 		}
 		GameManager.Players[id].NodePath = currentScene.spawn_player(playerName, id)
-		
-	if multiplayer.is_server():
-		for i in GameManager.Players:
-			print("sending " + str(GameManager.Players[i].id))
-			send_player_information.rpc(GameManager.Players[i].name, GameManager.Players[i].id)
-
+	
+func removePlayerFromDict():
+	pass
+	
 func start_lobby():
 	currentScene = load(lobbyScene).instantiate()
 	self.add_child(currentScene)
