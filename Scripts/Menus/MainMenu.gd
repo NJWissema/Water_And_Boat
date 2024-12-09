@@ -12,7 +12,7 @@ func _on_start_button_pressed():
 #Options button pressed. Open options menu
 func _on_options_button_pressed():
 	var options_node = options.instantiate()
-	get_tree().current_scene.add_child(options_node)
+	get_tree().root.add_child(options_node)
 
 #Quit button pressed. Quit
 func _on_quit_button_pressed():

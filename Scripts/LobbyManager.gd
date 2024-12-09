@@ -3,7 +3,7 @@ extends Node3D
 ## IP address to host
 @export var PlayerSpawns : Node3D
 ## Player scene to be used.
-@export var playerScene = "res://Scenes/SubScenes/Player.tscn"
+@export var playerScene : PackedScene
 var playerSpawns = []
 
 # Called when the node enters the scene tree for the first time.
@@ -12,9 +12,13 @@ func _ready():
 	for spawn in PlayerSpawns.get_children():
 		playerSpawns.append(spawn)
 
-func spawn_player(playerName, playerID) -> NodePath:
+	# Spawn players
+	for i in GameManager.Players:
+		spawn_player(GameManager.Players[i].name, GameManager.Players[i].id)
+
+func spawn_player(playerName, playerID):
 	
-	var currentPlayer = load(playerScene).instantiate()
+	var currentPlayer = playerScene.instantiate()
 	currentPlayer.name = str(GameManager.Players[playerID].id)
 	currentPlayer.playerName = playerName
 	currentPlayer.playerID = playerID
@@ -26,7 +30,7 @@ func spawn_player(playerName, playerID) -> NodePath:
 	currentPlayer.global_position = spawn.global_position
 	playerSpawns.append(spawn)
 	
-	return currentPlayer.get_path()
+	#return currentPlayer.get_path()
 
 func despawn_player(playerID):
 	get_node(GameManager.Players[playerID].NodePath).queue_free()
