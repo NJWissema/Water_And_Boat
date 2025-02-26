@@ -1,4 +1,4 @@
-extends CharacterBody3D
+class_name Player extends CharacterBody3D
 
 
 const SPEED = 5.0
@@ -13,15 +13,16 @@ var primaryPlayer : bool = false
 @onready var label := $Label3D
 @onready var robot := $"3DGodotRobot"
 @onready var robotAnimation := $"3DGodotRobot/AnimationPlayer"
+@onready var Synchronizer := $MultiplayerSynchronizer
 
 func _ready():
-	$MultiplayerSynchronizer.set_multiplayer_authority(str(name).to_int())
-	camera.current = $MultiplayerSynchronizer.get_multiplayer_authority() == multiplayer.get_unique_id()
+	Synchronizer.set_multiplayer_authority(str(name).to_int())
+	camera.current = Synchronizer.get_multiplayer_authority() == multiplayer.get_unique_id()
 	
 	label.text = str(playerName)
 
 func _unhandled_input(event):
-	if $MultiplayerSynchronizer.get_multiplayer_authority() == multiplayer.get_unique_id():
+	if Synchronizer.get_multiplayer_authority() == multiplayer.get_unique_id():
 		#Handle mouse state
 		if event is InputEventMouseButton:
 			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
@@ -38,7 +39,7 @@ func _unhandled_input(event):
 				camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-85), deg_to_rad(85))
 
 func _physics_process(delta):
-	if $MultiplayerSynchronizer.get_multiplayer_authority() == multiplayer.get_unique_id():
+	if Synchronizer.get_multiplayer_authority() == multiplayer.get_unique_id():
 		# Add the gravity.
 		if not is_on_floor():
 			velocity += get_gravity() * delta

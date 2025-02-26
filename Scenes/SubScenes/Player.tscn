@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://cha8wav82ruuq"]
+[gd_scene load_steps=6 format=3 uid="uid://cha8wav82ruuq"]
 
 [ext_resource type="Script" path="res://Scripts/Player.gd" id="1_s2ls6"]
 [ext_resource type="PackedScene" uid="uid://clcjo4nc4i4jw" path="res://3DGodotRobot.glb" id="2_tk1mo"]
@@ -17,6 +17,8 @@ properties/1/replication_mode = 1
 properties/2/path = NodePath("3DGodotRobot/AnimationPlayer:current_animation")
 properties/2/spawn = true
 properties/2/replication_mode = 1
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_kmckf"]
 
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_s2ls6")
@@ -41,5 +43,14 @@ billboard = 2
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_5ynce")
+
+[node name="Node3D" type="Node3D" parent="."]
+
+[node name="RayCast3D" type="RayCast3D" parent="Node3D"]
+
+[node name="Area3D" type="Area3D" parent="Node3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/Area3D"]
+shape = SubResource("BoxShape3D_kmckf")
 
 [editable path="3DGodotRobot"]
