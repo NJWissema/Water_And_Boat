@@ -39,12 +39,12 @@ func _ready():
 			#send_player_information.rpc(GameManager.Players[i].name, i)
 
 func start_game():
-	var MultiplayerManager = load(multiplayerManager).instantiate()
-	get_tree().root.add_child(MultiplayerManager)
 	self.queue_free()
 
 func _on_host_button_pressed():
 	GameManager.Hosting = true
+	var MultiplayerManager = load(multiplayerManager).instantiate()
+	get_tree().root.add_child(MultiplayerManager)
 	start_game()
 
 
