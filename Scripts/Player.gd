@@ -16,13 +16,15 @@ var primaryPlayer : bool = false
 @onready var Synchronizer := $MultiplayerSynchronizer
 
 func _ready():
-	Synchronizer.set_multiplayer_authority(str(name).to_int())
-	camera.current = Synchronizer.get_multiplayer_authority() == multiplayer.get_unique_id()
+	#Synchronizer.set_multiplayer_authority(str(name).to_int())
+	#camera.current = Synchronizer.get_multiplayer_authority() == multiplayer.get_unique_id()
 	
+	camera.current = true
 	label.text = str(playerName)
 
 func _unhandled_input(event):
-	if Synchronizer.get_multiplayer_authority() == multiplayer.get_unique_id():
+	#if Synchronizer.get_multiplayer_authority() == multiplayer.get_unique_id():
+	if true:
 		#Handle mouse state
 		if event is InputEventMouseButton:
 			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
@@ -39,7 +41,8 @@ func _unhandled_input(event):
 				camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-85), deg_to_rad(85))
 
 func _physics_process(delta):
-	if Synchronizer.get_multiplayer_authority() == multiplayer.get_unique_id():
+	#if Synchronizer.get_multiplayer_authority() == multiplayer.get_unique_id():
+	if true:
 		# Add the gravity.
 		if not is_on_floor():
 			velocity += get_gravity() * delta

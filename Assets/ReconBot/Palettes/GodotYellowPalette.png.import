@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cx62t8y3vulyh"
-path="res://.godot/imported/GodotRedPalette.png-a4579f8ef889b349b0eefa48c0457874.ctex"
+uid="uid://cjjj06opx8v3u"
+path="res://.godot/imported/GodotYellowPalette.png-4c4442663f7f04e1b4ff8463430f1f20.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/GodotRedPalette.png"
-dest_files=["res://.godot/imported/GodotRedPalette.png-a4579f8ef889b349b0eefa48c0457874.ctex"]
+source_file="res://Assets/ReconBot/Palettes/GodotYellowPalette.png"
+dest_files=["res://.godot/imported/GodotYellowPalette.png-4c4442663f7f04e1b4ff8463430f1f20.ctex"]
 
 [params]
 

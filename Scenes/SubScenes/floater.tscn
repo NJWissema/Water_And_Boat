@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://0dp7lsetga4r"]
+
+[ext_resource type="Script" path="res://Scripts/floater.gd" id="1_5udbh"]
+
+[node name="Floater" type="Node3D"]
+script = ExtResource("1_5udbh")

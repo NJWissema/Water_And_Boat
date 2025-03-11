@@ -1,14 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://cvsbwjs3ro5v4"]
+[gd_scene load_steps=3 format=3 uid="uid://cvsbwjs3ro5v4"]
 
-[ext_resource type="Shader" uid="uid://qnhw7oxrxx1h" path="res://Shaders/VisualWaterTest.tres" id="1_dic1q"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_if270"]
-render_priority = 0
-shader = ExtResource("1_dic1q")
-shader_parameter/Alpha = 1.0
+[ext_resource type="Material" uid="uid://c0v4retv3odxy" path="res://Assets/Materials/water_shader_material.tres" id="1_k0tb3"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_yq54y"]
-material = SubResource("ShaderMaterial_if270")
+material = ExtResource("1_k0tb3")
 size = Vector2(64, 64)
 subdivide_width = 16
 subdivide_depth = 16

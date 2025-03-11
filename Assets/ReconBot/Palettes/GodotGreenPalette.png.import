@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dsc4popepfist"
-path="res://.godot/imported/GodotGreenPalette.png-4ff1b5247f2669190a7d650ddbfac427.ctex"
+path="res://.godot/imported/GodotGreenPalette.png-8ad4920c98d463c6a48f037e2fa0ee9a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/GodotGreenPalette.png"
-dest_files=["res://.godot/imported/GodotGreenPalette.png-4ff1b5247f2669190a7d650ddbfac427.ctex"]
+source_file="res://Assets/ReconBot/Palettes/GodotGreenPalette.png"
+dest_files=["res://.godot/imported/GodotGreenPalette.png-8ad4920c98d463c6a48f037e2fa0ee9a.ctex"]
 
 [params]
 

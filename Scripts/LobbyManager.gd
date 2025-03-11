@@ -3,7 +3,7 @@ extends Node3D
 ## IP address to host
 @export var PlayerSpawns : Node3D
 ## Player scene to be used.
-@export var playerScene : PackedScene
+@export var playerScene : Player
 var playerSpawns = []
 
 # Called when the node enters the scene tree for the first time.

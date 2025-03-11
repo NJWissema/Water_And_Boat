@@ -1,0 +1,13 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://c0v4retv3odxy"]
+
+[ext_resource type="Shader" path="res://Shaders/Water.gdshader" id="1_l8n6b"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_l8n6b")
+shader_parameter/water_color = Color(0.0625, 0.1992, 0.3594, 1)
+shader_parameter/index_of_refraction = 1.333
+shader_parameter/wave_information_1 = Vector4(1, 0.545, 0.5, 60)
+shader_parameter/wave_information_2 = Vector4(0, 1, 0.25, 20)
+shader_parameter/wave_information_3 = Vector4(1, 1, 0.15, 10)
+shader_parameter/wave_information_4 = Vector4(1, 1, 1, 1)
