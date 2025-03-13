@@ -3,8 +3,11 @@ render_mode cull_disabled;
 
 uniform sampler2D screen_texture : hint_screen_texture, source_color, repeat_disable;
 uniform sampler2D normal_map_texture : hint_normal;
+uniform sampler2D depth_texture : hint_depth_texture;
+
 uniform vec3 water_color : source_color = vec3(0.0625, 0.1992, 0.3594);
 uniform float index_of_refraction = 1.333;
+
 
 //Wave information in order:  direction_x, direction_y, steepness, wavelenth
 uniform vec4 wave_information_1 = vec4(1.0, 0, 0.5, 10.0);
@@ -19,7 +22,8 @@ float snells_window(vec3 normal, vec3 view, float ior) {
 	return step(sqrt(1.0 - cos_theta * cos_theta) * ior, 1.0);
 }
 
-// direction.y represents z axis (since it is 2D vec)
+
+// Determine gerstner wave displacement for wave parameters
 vec3 gerstner(vec3 vertex, vec4 wave, inout vec3 tangent, inout vec3 binormal){
 //	Variables
 	float k = 2.0 * PI / wave.w;
@@ -51,8 +55,6 @@ vec3 gerstner(vec3 vertex, vec4 wave, inout vec3 tangent, inout vec3 binormal){
 }
 
 void vertex(){
-	//VERTEX = gerstner(VERTEX, normalize(testdirection), TIME, speeed, steeepness, aamplitude, waavelength);
-	//NORMAL = gerstner_normal(VERTEX, normalize(testdirection), TIME, speeed, steeepness, aamplitude, waavelength);
 	vec3 tangent = vec3(1, 0, 0);
 	vec3 binormal = vec3(0, 0, 1);
 	vec3 output_vertex = VERTEX;
@@ -66,28 +68,5 @@ void vertex(){
 }
 
 void fragment() {
-	ROUGHNESS = 0.0;
-
-	// Basic waves
-	float time = TIME * 0.05;
-	vec3 normal_sample_1 = texture(normal_map_texture, UV + vec2(-1, 1) * time).xyz * 2.0 - 1.0;
-	vec3 normal_sample_2 = texture(normal_map_texture, -UV + vec2(0, 1) * time).xyz * 2.0 - 1.0;
-	vec3 normal_map = vec3(normal_sample_1.xy + normal_sample_2.xy, 0.0);
 	
-	// Set NORMAL directly since we need to use it later
-	NORMAL_MAP_DEPTH = 1.0;
-	normal_map.z = sqrt(max(0.0, 1.0 - dot(normal_map.xy, normal_map.xy)));
-	NORMAL = normalize(mix(NORMAL, TANGENT * normal_map.x + BINORMAL * normal_map.y + NORMAL * normal_map.z, NORMAL_MAP_DEPTH));
-	
-	// Screen distortion
-	vec2 distorted_uv = SCREEN_UV - normal_map.xy * 2.0 / length(VERTEX);
-	ALBEDO = texture(screen_texture, distorted_uv).rgb;
-	
-	// Apply Snell's window mask to water surface when viewed from below
-	if(!FRONT_FACING) {
-		float mask = snells_window(NORMAL, VIEW, index_of_refraction);
-		ALBEDO = mix(water_color, ALBEDO, mask);
-		RADIANCE = vec4(vec3(0.0), mask);
-		IRRADIANCE = vec4(vec3(1.0), mask);
-	}
 }

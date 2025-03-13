@@ -15,6 +15,8 @@ var primaryPlayer : bool = false
 @onready var robotAnimation := $"3DGodotRobot/AnimationPlayer"
 @onready var Synchronizer := $MultiplayerSynchronizer
 
+var is_swimming: bool = false
+
 func _ready():
 	#Synchronizer.set_multiplayer_authority(str(name).to_int())
 	#camera.current = Synchronizer.get_multiplayer_authority() == multiplayer.get_unique_id()

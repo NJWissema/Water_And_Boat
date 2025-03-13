@@ -102,6 +102,24 @@ mesh = SubResource("BoxMesh_uwkc3")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D3/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_b08sm")
 
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.0588708, -0.998266, 0, 0.998266, -0.0588708, 0, 0, 0, 1, 5.94626, -3.18606, 0)
+mesh = SubResource("BoxMesh_uwkc3")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D4"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D4/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_b08sm")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.0129225, -0.219125, -0.975611, 0.998266, -0.0588708, 0, -0.057435, -0.973919, 0.219506, 2.73052, -3.18606, 5.90003)
+mesh = SubResource("BoxMesh_uwkc3")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D5"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D5/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_b08sm")
+
 [node name="Player" parent="." instance=ExtResource("2_j7gs7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.26378, 0)
 playerName = "TEST"
