@@ -3,6 +3,7 @@ class_name Player extends CharacterBody3D
 
 const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
+const SWIM_VELOCITY = 2.0
 
 var primaryPlayer : bool = false
 @export var playerName: String
@@ -16,6 +17,7 @@ var primaryPlayer : bool = false
 @onready var Synchronizer := $MultiplayerSynchronizer
 
 var is_swimming: bool = false
+var is_floating: bool = false
 
 func _ready():
 	#Synchronizer.set_multiplayer_authority(str(name).to_int())
@@ -45,27 +47,49 @@ func _unhandled_input(event):
 func _physics_process(delta):
 	#if Synchronizer.get_multiplayer_authority() == multiplayer.get_unique_id():
 	if true:
-		# Add the gravity.
-		if not is_on_floor():
-			velocity += get_gravity() * delta
-			robotAnimation.play("Fall")
-
-		# Handle jump.
-		if Input.is_action_just_pressed("Player_up") and is_on_floor():
-			velocity.y = JUMP_VELOCITY
-			robotAnimation.play("Jump")
-
 		# Get the input direction and handle the movement/deceleration.
-		# As good practice, you should replace UI actions with custom gameplay actions.
-		var input_dir = Input.get_vector("Player_left", "Player_right", "Player_forward", "Player_back")
-		var direction = (neck.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
-		if direction:
-			velocity.x = direction.x * SPEED
-			velocity.z = direction.z * SPEED
-			robotAnimation.play("Run")
+		
+			
+		if is_swimming:
+			# Handle jump.
+			if Input.is_action_just_pressed("player_up"):
+				if is_floating:
+					velocity.y = JUMP_VELOCITY
+				else:
+					velocity.y = SWIM_VELOCITY
+			# Get the input direction and handle the movement/deceleration.
+			var input_dir = Input.get_vector("player_left", "player_right", "player_forward", "player_back")
+			var direction = (neck.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+			if direction:
+				velocity.x = direction.x * SPEED
+				velocity.z = direction.z * SPEED
+				robotAnimation.play("Run")
+			else:
+				velocity.x = move_toward(velocity.x, 0, SPEED)
+				velocity.z = move_toward(velocity.z, 0, SPEED)
+				robotAnimation.play("Idle")
+
 		else:
-			velocity.x = move_toward(velocity.x, 0, SPEED)
-			velocity.z = move_toward(velocity.z, 0, SPEED)
-			robotAnimation.play("Idle")
+			# Add the gravity.
+			if not is_on_floor():
+				velocity += get_gravity() * delta
+				robotAnimation.play("Fall")
+
+			# Handle jump.
+			if Input.is_action_just_pressed("player_up") and is_on_floor():
+				velocity.y = JUMP_VELOCITY
+				robotAnimation.play("Jump")
+			
+			var input_dir = Input.get_vector("player_left", "player_right", "player_forward", "player_back")
+			var direction = (neck.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+			# Get the input direction and handle the movement/deceleration.
+			if direction:
+				velocity.x = direction.x * SPEED
+				velocity.z = direction.z * SPEED
+				robotAnimation.play("Run")
+			else:
+				velocity.x = move_toward(velocity.x, 0, SPEED)
+				velocity.z = move_toward(velocity.z, 0, SPEED)
+				robotAnimation.play("Idle")
 
 		move_and_slide()
