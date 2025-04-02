@@ -1,6 +1,37 @@
-[gd_scene load_steps=2 format=3 uid="uid://0dp7lsetga4r"]
+[gd_scene load_steps=6 format=3 uid="uid://0dp7lsetga4r"]
 
 [ext_resource type="Script" path="res://Scripts/floater.gd" id="1_5udbh"]
 
+[sub_resource type="SphereMesh" id="SphereMesh_xbr32"]
+radius = 0.3
+height = 0.6
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oexvb"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_064tc"]
+material = SubResource("StandardMaterial3D_oexvb")
+top_radius = 0.05
+bottom_radius = 0.05
+height = 1.0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_ygfkt"]
+top_radius = 0.001
+bottom_radius = 0.15
+height = 0.4
+
 [node name="Floater" type="Node3D"]
 script = ExtResource("1_5udbh")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_xbr32")
+
+[node name="Arrow" type="Node3D" parent="."]
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Arrow"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
+mesh = SubResource("CylinderMesh_064tc")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Arrow"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
+mesh = SubResource("CylinderMesh_ygfkt")
