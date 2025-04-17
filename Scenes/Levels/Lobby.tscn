@@ -121,8 +121,9 @@ mesh = SubResource("BoxMesh_uwkc3")
 shape = SubResource("ConcavePolygonShape3D_b08sm")
 
 [node name="Player" parent="." instance=ExtResource("2_j7gs7")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.26378, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.78953, 3.62313, 0)
 playerName = "TEST"
 playerID = 1
 
-[node name="Water" parent="." instance=ExtResource("3_tbkno")]
+[node name="Water" parent="." node_paths=PackedStringArray("player") instance=ExtResource("3_tbkno")]
+player = NodePath("../Player")

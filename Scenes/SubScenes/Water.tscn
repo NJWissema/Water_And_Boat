@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://cvsbwjs3ro5v4"]
+[gd_scene load_steps=5 format=3 uid="uid://cvsbwjs3ro5v4"]
 
 [ext_resource type="Material" uid="uid://4q4cm4651ty0" path="res://Assets/Materials/online_water_shader_material.tres" id="1_s7o2d"]
+[ext_resource type="Script" path="res://Scripts/water.gd" id="1_vj3vm"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_yq54y"]
 material = ExtResource("1_s7o2d")
@@ -8,8 +9,21 @@ size = Vector2(64, 64)
 subdivide_width = 16
 subdivide_depth = 16
 
-[node name="Water" type="Node3D"]
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_wesuk"]
+radius = 34.0
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="Water" type="Node3D"]
+script = ExtResource("1_vj3vm")
+
+[node name="WaterSurface" type="MeshInstance3D" parent="."]
 layers = 2
 mesh = SubResource("PlaneMesh_yq54y")
+
+[node name="SurfaceBody" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+
+[node name="SurfaceShape" type="CollisionShape3D" parent="SurfaceBody"]
+shape = SubResource("CylinderShape3D_wesuk")
+
+[connection signal="body_entered" from="SurfaceBody" to="." method="_on_surface_body_body_entered"]
+[connection signal="body_exited" from="SurfaceBody" to="." method="_on_surface_body_body_exited"]

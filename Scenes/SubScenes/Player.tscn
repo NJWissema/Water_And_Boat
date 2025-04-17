@@ -33,7 +33,7 @@ shape = SubResource("CapsuleShape3D_fk8sc")
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 1.25, 0)
 
 [node name="Camera3D" type="Camera3D" parent="Neck"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.71538e-08, 0, -0.539377)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.27692e-07, 0.83792, 1.46062)
 current = true
 fov = 90.0
 
